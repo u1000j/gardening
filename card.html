@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/reset.css">
+    <style>
+        html, body {
+            background-color:#222;
+            font-weight:700;
+        }
+        .main-content-1 {
+            width:100%; height:500vh;
+        }
+        .sticky {
+            position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;
+        }
+        .card_frame {
+            position:absolute; width:95vw; height:30vh; display:flex; align-items:center; justify-content:space-between;
+        }
+        .card {
+            width:24%; height:100%; display:flex; align-items:center; justify-content:center; 
+            font-size:1.5rem; font-weight:700; transform-style:preserve-3d; position:relative; transform:perspective(4000px) translateX(100vw) rotateY(180deg);
+        }
+        .front, .back {
+            position:absolute; width:100%; height:100%; border-radius:1vw; overflow:hidden; backface-visibility:hidden;
+        }
+        .front {
+            background-color:salmon; font-size:2.0rem; display:flex; align-items:center; justify-content:center; text-align:center;
+        }
+        .back {
+            transform:rotateY(180deg); background-color:seagreen; background-image:repeating-linear-gradient(0deg, #3b3a38, #3b3a38, 33.3%, #ffffff00 0px, #ffffff00 67%);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content-1">
+        <div class="sticky">
+            <div class="card_frame">
+                <div class="card">
+                    <div class="front">SNS이미지</div>
+                    <div class="back"></div>
+                </div>
+                <div class="card">
+                    <div class="front">SNS이미지</div>
+                    <div class="back"></div>
+                </div>
+                <div class="card">
+                    <div class="front">SNS이미지</div>
+                    <div class="back"></div>
+                </div>
+                <div class="card">
+                    <div class="front">SNS이미지</div>
+                    <div class="back"></div>
+                </div>
+            </div><!-- e:card_frame -->
+        </div><!-- e:sticky -->
+    </div>
+
+    <script>
+        class CardFlipOnScroll {
+            constructor(wrapper, sticky) {
+                this.wrapper = wrapper
+                this.sticky = sticky
+                this.cards = sticky.querySelectorAll('.card')
+                this.length = this.cards.length
+
+                this.start = 0
+                this.end = 0
+                this.step = 0
+            }
+            init() {
+                this. start = this.wrapper.offsetTop
+                this. end = this.wrapper.offsetTop + this.wrapper.offsetHeight - innerHeight
+                this. step = (this.end - this.start) / (this.length*2)
+            }
+            animate() {
+                this.cards.forEach((card, i) => {
+                    const s = this.start + this.step * i
+                    const e = s + this.step * (this.length + 1)
+                })
+            }
+        }
+        const mainContent1 = document.querySelector('.main-content-1')
+        const sticky = document.querySelector('.sticky')
+        const CardFlipOnScroll = new CardFlipOnScroll(mainContent1, sticky)
+    </script>
+</body>
+</html>
