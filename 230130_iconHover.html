@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>icon_hover</title>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@700&display=swap');</style>
+    <style>
+        .icon {
+            position:relative;
+            padding-left:300px;
+            background-image:url(../garden1/me_hover.png);
+            background-repeat:no-repeat;
+            background-position:-300px 0;
+            background-size:600px;
+            line-height:300px;
+            font-family: 'Unbounded', cursive; font-weight:700;
+        }
+        .icon::after {
+            content:'';
+            position:absolute;
+            z-index:1px;
+            top:0; left:0;
+            width:0;
+            height:100%;
+            background-image:url(../garden1/me_hover.png);
+            background-repeat:no-repeat;
+            background-position:0 0;
+            background-size:600px;
+            transition:all 0.5s;
+        }
+        .icon:hover::after {width:300px;}
+    </style>
+</head>
+<body>
+    <div class="icon"><a href="../garden1/resume.pdf" target="_blank">click resume</a></div>
+</body>
+</html>
