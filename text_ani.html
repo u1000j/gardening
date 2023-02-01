@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>텍스트 흐르기 효과</title>
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="cover">
+        <p class="first-parallel"></p>
+    </div>
+    <div class="cover">
+        <p class="second-parallel"></p>
+    </div>
+
+    <script>
+        const pTag1 = document.querySelector('.first-parallel')
+        const pTag2 = document.querySelector('.second-parallel')
+
+        const textArr1 = 'U1000J U1000J u1000j u1000j U1000J U1000J'.split(' ')
+        const textArr2 = 'U1000J U1000J U1000J U1000J u1000j u1000j u1000j'.split(' ')
+
+        let count1 = 0
+        let count2 = 0
+
+        initTexts(pTag1, textArr1)
+        initTexts(pTag2, textArr2)
+
+        function initTexts(element, textArray) {
+            textArray.push(...textArray)
+            for (let i = 0; i < textArray.length; i++) {
+                element.innerText += `${textArray[i]}\u00A0\u00A0\u00A0\u00A0`
+            }
+        }
+
+        function marqueeText(count, element, direction){
+            if (count > element.scrollWidth / 2){
+                element.style.transform = translate3d(0,0,0)
+                count = 0
+            }
+            element.style.transform = `translate3d(${count * direction}px, 0, 0)`
+            return count
+        }
+
+        function animate(){
+            count1++
+            count2++
+
+            count1 = marqueeText(count1, pTag1, -1)
+            count2 = marqueeText(count2, pTag2, 1)
+
+            window.requestAnimationFrame(animate)
+        }
+
+        function scrollHandler(){
+        count1 += 15
+        count2 += 15
+        }
+
+        window.addEventListener('scroll', scrollHandler)
+        animate()
+    </script>
+</body>
+</html>
